@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Todo;
+import model.User;
 
 @WebServlet("/InputServlet")
 public class imputservlet extends HttpServlet {
@@ -22,9 +24,18 @@ public class imputservlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		//リダイレクト
-		response.sendRedirect("input.jsp");
+		// ログインしているか確認するため
+		// セッションスコープからユーザー情報を取得
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if (user == null) { // ログインしていない場合
+			// リダイレクト
+			response.sendRedirect("input.jsp");
+		} else { // ログイン済みの場合
+			// フォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

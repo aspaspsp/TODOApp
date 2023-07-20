@@ -4,15 +4,23 @@ import java.io.Serializable;
 
 public class Todo implements Serializable {
 
-	private int rank;
+	private String rank;
 	private String content;
 	private String deadline;
 
-	public int getRank() {
+	public Todo(String rank2, String content2, String deadline2) {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public Todo() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public String getRank() {
 		return rank;
 	}
 
-	public void setRank(int rank) {
+	public void setRank(String rank) {
 		this.rank = rank;
 	}
 
